@@ -1,0 +1,25 @@
+
+alias ..='cd ..'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+
+
+
+
+# Life need color - Some colorful aliases:
+
+alias diff='diff --color=always'
+alias grep='grep --color=always'
+alias diff='diff --color=always'
+alias ll='ls -lh --color=always' 
+alias lll='ls -alh --color=always' 
+alias ip='ip --color=always'
+
+[ -f "/etc/grc.zsh" ] && source /etc/grc.zsh
+[ -f "$HOME"/"/.config/grc.zsh" ] && source ~/.config/grc.zsh
+
+
+
+
+
+[ -f "/usr/bin/git" ] && alias dotgit='/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME'
