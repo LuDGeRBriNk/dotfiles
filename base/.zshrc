@@ -155,3 +155,7 @@ bindkey -M vicmd 'j' history-substring-search-down
 [ -f "$HOME/.config/shell.shortcuts" ] && source "$HOME/.config/shell.shortcuts"
 [ -f "$HOME/.config/shell.aliases" ] && source "$HOME/.config/shell.aliases"
 [ -f "$HOME/.config/shell.autostart" ] && source "$HOME/.config/shell.autostart"
+
+
+# Load .secrets.zsh, which contains sensible data.
+[ -f "$HOME/.secrets.zsh" ] && source "$HOME/.secrets.zsh"

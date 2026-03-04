@@ -6,11 +6,18 @@ import urllib.parse
 import urllib.request
 import urllib.error
 import html # Added to escape special characters
+import os
+import subprocess
 
 # SETTINGS
-CITY_DEFAULT = "Bauru"
+CITY_DEFAULT = os.environ.get("WEATHER_CITY")
 RETRY_INTERVAL = 10     # Seconds to wait after failure
 SUCCESS_INTERVAL = 3600 # Seconds to wait after success (1 Hour)
+
+if not CITY_DEFAULT:
+    print("Error: API key not found in environment.")
+    subprocess.run(["notify-send", "-u", "critical", "Waybar Weather Error", "City name not found in environment variables."])
+    exit(1)
 
 def get_weather_data(city_name):
     city_encoded = urllib.parse.quote(city_name)
