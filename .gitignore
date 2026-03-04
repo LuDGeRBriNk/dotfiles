@@ -1,0 +1,17 @@
+# Ignore everything by default
+/*
+
+# Allow our specific modules
+!/base/
+!/hyprland/
+!/.gitignore
+!/README.md
+
+# STRICTLY IGNORE within the allowed modules (Safety Net)
+**/.ssh/*
+**/*.key
+**/*.pem
+**/*history*
+**/histfile
+**/.zcompdump*
+**/.lesshst
