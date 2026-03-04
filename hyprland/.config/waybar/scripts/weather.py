@@ -16,7 +16,7 @@ SUCCESS_INTERVAL = 3600 # Seconds to wait after success (1 Hour)
 
 if not CITY_DEFAULT:
     print("Error: API key not found in environment.")
-    subprocess.run(["notify-send", "-u", "critical", "Waybar Weather Error", "City name not found in environment variables."])
+    subprocess.run(["notify-send", "-u", "critical", "Waybar Weather Error", "City name not found in environment variables. Check ~/.secrets.zsh file"])
     exit(1)
 
 def get_weather_data(city_name):
