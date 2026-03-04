@@ -2,6 +2,7 @@
 
 # This script automates virt-manager configs.
 # It REQUIRES whitelisting these commands in the sudoers file!
+# It uses absolute paths just to mitigate against hidden env variables.
 
 # Start required services
 echo "Starting libvirt daemon..."
