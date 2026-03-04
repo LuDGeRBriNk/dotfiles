@@ -8,13 +8,19 @@
 # HELPER FUNCTIONS
 # ==========================================
 
-# Function to echo to terminal AND send a desktop notification
+# Function to echo to terminal AND send a transient desktop notification
 notify_status() {
     local message="$1"
     echo "$message"
-    # Sends a standard notification. '-h string:x-dunst-stack-tag:vman' 
-    # replaces the previous notification so they don't pile up on your screen.
-    notify-send "Virt-Manager" "$message" -i virt-manager -h string:x-dunst-stack-tag:vman
+    # Sends a standard notification. 
+    # '-h string:x-dunst-stack-tag:vman' replaces the previous notification.
+    # '-h int:transient:1' tells the daemon NOT to keep this in the history list.
+    # '-t 3000' makes the notification disappear from the screen after 3 seconds.
+    notify-send "Virt-Manager" "$message" \
+        -i virt-manager \
+        -h string:x-dunst-stack-tag:vman \
+        -h int:transient:1 \
+        -t 3000
 }
 
 # Function to execute a command, catch errors, and notify if it fails
@@ -40,6 +46,7 @@ execute_and_catch() {
         fi
 
         # Print to terminal and send a critical notification for actual errors
+        # Note: We do NOT make errors transient, so they stay in your history to be read.
         echo "ERROR ($action_name): $error_output"
         notify-send "Virt-Manager Error" "Failed to $action_name:\n$error_output" -u critical -i dialog-error
     fi
@@ -57,7 +64,7 @@ notify_status "Starting default network..."
 execute_and_catch "start default network" sudo /usr/bin/virsh net-start default
 
 notify_status "Launching virt-manager..."
-# The script will pause on this line until you close the virt-manager window
+# The script will pause on this line until the virt-manager window is closed.
 GDK_DPI_SCALE=1.4 virt-manager
 
 notify_status "virt-manager closed. Cleaning up..."
