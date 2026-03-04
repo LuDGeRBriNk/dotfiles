@@ -1,0 +1,30 @@
+[options]
+# Start in fullscreen mode
+fullscreen = false
+
+# Show the file name in the window title
+title_text = imv - [${imv_current_index}/${imv_total_images}] [${imv_current_file}]
+
+# Background color for transparent images (e.g., PNGs)
+background = 000000
+
+# Whether to Upscale images smaller than the window
+upscaling_method = linear
+
+# Automatically play animated GIFs
+recursive = true
+
+[binds]
+# Use 'q' to quit instead of ESC
+q = quit
+
+# Zooming with '+' and '-'
+plus = zoom actual
+minus = zoom fit
+
+# Use 'h/j/k/l' (Vim keys) to navigate if you prefer
+h = prev
+l = next
+
+# Rotate images
+r = rotate by 90

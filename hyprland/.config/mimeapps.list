@@ -1,0 +1,5 @@
+[Added Associations]
+image/jpeg=imv-5.desktop;imv-4.desktop;imv-3.desktop;imv-2.desktop;
+
+[Default Applications]
+image/jpeg=imv-5.desktop;

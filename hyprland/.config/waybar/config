@@ -1,0 +1,421 @@
+{
+    // ==========================================================
+    // 1. GLOBAL BAR SETTINGS
+    // ==========================================================
+    "layer": "top",
+    "position": "top",
+    "height": 38,
+    "spacing": 4,
+    "margin-top": 4,
+    "margin-left": 16,
+    "margin-right": 16,
+    "reload_style_on_change": true,
+    
+    // Monitors where the bar appears
+    "output": ["eDP-1", "eDP-2", "eDP-3", "eDP-4", "eDP-5"],
+
+    // ==========================================================
+    // 2. MODULE LAYOUT
+    // ==========================================================
+    "modules-left": [
+        "custom/appmenu",       // Arch Linux Icon
+        "hyprland/workspaces",  // Workspace indicators
+        "hyprland/window"       // Current Window Title
+    ],
+    
+    "modules-center": [
+        "idle_inhibitor",       // Inhibits hypridle to trigger
+        "custom/notification",  // SwayNC Bell
+        "clock#date",           // Date
+        "clock#time",           // Clock
+        "custom/weather"        // Weather Script
+    ],
+    
+    "modules-right": [
+        "tray",                 // System Tray
+        "group/network",        // Wi-Fi Drawer
+        "group/bluetooth",      // Bluetooth Drawer
+        "pulseaudio",           // Volume Control
+        "backlight",            // Brightness Control
+        "memory",               // RAM Usage
+        "cpu",                  // CPU Usage
+        "custom/gpu",           // GPU usage
+        "battery",              // Battery monitor
+        "group/power"           // Power Menu Drawer
+    ],
+
+    // ==========================================================
+    // 3. LEFT MODULES
+    // ==========================================================
+    
+    "custom/appmenu": {
+        "format": "",
+        "on-click": "python ~/scripts/dashboard.py",
+        "tooltip": false
+    },
+
+    "hyprland/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "ignore-workspaces": ["1"],
+        "format": "{icon}",
+        "format-icons": {
+            // "1": " ",
+            "2": "1",
+            "3": "2",
+            "4": "3",
+            "5": "4",
+            "6": "5",
+            "7": "6",
+            "8": "7",
+            "9": "8",
+            "10": "9",
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+
+    "hyprland/window": {
+        "format": "{title}",
+        "max-length": 50,
+        "separate-outputs": true,
+        "rewrite": {
+            // --- Browsers ---
+            "(.*) — Mozilla Firefox": "  $1",
+            "(.*) - Firefox Developer Edition": "  $1",
+            "(.*) - Chromium": "  $1",
+            "(.*) - Brave Search": "  $1",
+
+            // --- Development ---
+            "(.*) - Code - OSS": "  $1",
+            "(.*) - Visual Studio Code": "  $1",
+            "(.*) - Neovim": "  $1",
+            "nvim (.*)": "  $1",
+            "(.*) - Emacs": "  $1",
+            "(.*) - Sublime Text": "  $1",
+
+            // --- Terminals & System ---
+            "(.*) - kitty": "  $1",
+            "(.*) - Alacritty": "  $1",
+            "(.*) - fish": "  $1",
+            "(.*) - zsh": "  $1",
+            "yazi: (.*)": "󰇄  $1", // File Manager
+            "btop": "󰓅  System Monitor",
+            "nwg-look": "  Appearance",
+
+            // --- Communication & Media ---
+            "(.*) - Discord": "  $1",
+            "(.*) - Slack": "  $1",
+            "Spotify( - Free)?": "  Spotify",
+            "(.*) - VLC media player": "󰕼  $1",
+            "OBS (.*)": "󰐌  OBS",
+
+            // --- Documents & Graphics ---
+            "(.*) - Zotero": "  $1",
+            "(.*) - LibreOffice (.*)": "󰈙  $1",
+            "GIMP (.*)": "  $1",
+            "Inkscape (.*)": "  $1",
+
+            // --- Catch-all for empty titles ---
+            "^$": "  Hyprland"
+        }
+    },
+
+    // ==========================================================
+    // 4. CENTER MODULES
+    // ==========================================================
+
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "", // Open eye icon (awake)
+            "deactivated": "" // Closed eye icon (can sleep)
+        },
+        "tooltip": true,
+        "tooltip-format-activated": "Caffeine Mode: ON",
+        "tooltip-format-deactivated": "Caffeine Mode: OFF"
+    },
+    
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": "",
+            "inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "inhibited-none": "",
+            "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-inhibited-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
+    },
+
+    // DATE MODULE (Contains the Calendar)
+    "clock#date": {
+        "class": "my-date",
+        "format": "  {:%a %F}",
+        "tooltip-format": "<tt>{calendar}</tt>",
+        "calendar": {
+            "mode": "month",
+            "mode-mon-col": 3,
+            "weeks-pos": "right",
+            "on-scroll": 1,
+            "on-click-right": "mode",
+            "format": {
+                "months": "<span color='#ffead3'><b>{}</b></span>",
+                "days": "<span color='#ecc6d9'><b>{}</b></span>",
+                "weeks": "<span color='#99ffdd'><b>W{}</b></span>",
+                "weekdays": "<span color='#ffcc66'><b>{}</b></span>",
+                "today": "<span color='#ff6699'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions": {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
+    },
+
+    // TIME MODULE (High update rate for seconds)
+    "clock#time": {
+        "class": "my-time",
+        "tooltip": false,
+        "interval": 1,
+        "format": "  {:%H:%M:%S}",
+        "format-alt": "  {:%H:%M}"
+    },
+
+    "custom/weather": {
+        "format": "{}",
+        "tooltip": true,
+        "exec": "~/.config/waybar/scripts/weather.py bauru",
+        "return-type": "json"
+    },
+
+    // ==========================================================
+    // 5. RIGHT MODULES
+    // ==========================================================
+
+    "tray": {
+        "icon-size": 24,
+        "spacing": 10
+    },
+
+    // NETWORK DRAWER
+    "group/network": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-network",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "network#icon", // Always visible
+            "network#text"  // Hidden drawer
+        ]
+    },
+
+    "network#icon": {
+        "format-wifi": "",
+        "format-ethernet": "󰈀",
+        "format-disconnected": "",
+        "format-disabled": "",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "on-click": "hyprctl dispatch exec '[float; size 700 900; center] kitty -e nmtui'"
+    },
+
+    "network#text": {
+        "format-wifi": "{essid}",
+        "format-ethernet": "Wired",
+        "format-disconnected": "Offline",
+        "format-disabled": "Disabled",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "on-click": "hyprctl dispatch exec '[float; size 700 900; center] kitty -e nmtui'"
+    },
+
+    // BLUETOOTH DRAWER
+    "group/bluetooth": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-bluetooth",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "bluetooth",       // The icon (Always visible)
+            "custom/bt-name"   // The Device Name (Hidden until hover)
+        ]
+    },
+
+    "bluetooth": {
+        "format": "󰂯",
+        "format-disabled": "󰂲", // Off
+        "format-connected": "󰂱", // Connected
+        "tooltip-format": "{controller_alias}\t{controller_address}",
+        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{device_enumerate}",
+        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+        "on-click": "hyprctl dispatch exec '[float; size 800 600; center] kitty bluetui'"
+    },
+
+    "custom/bt-name": {
+        "exec": "~/.config/waybar/scripts/bt-name.sh",
+        "interval": 5, // Check every 5 seconds
+        "format": "{}",
+        "tooltip": false,
+         "on-click": "hyprctl dispatch exec '[float; size 800 600; center] kitty bluetui'"
+    },
+
+    "pulseaudio": {
+        "format": "{icon} {volume}%",
+        "format-muted": " Muted",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "hyprctl dispatch exec '[float; size 400 600; move 100%-410 40]' pavucontrol"
+    },
+
+    "backlight": {
+        "format": "{icon} {percent}%",
+        "format-icons": ["󰃞", "󰃟", "󰃠"],
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-"
+    },
+
+    // ----------------------------------------------------------------
+    // HARDWARE MONITORS
+    // ----------------------------------------------------------------
+
+    "memory": {
+        "interval": 1,
+        "format": " {}%",
+        "tooltip": true,
+        "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty btop'",
+        // Memory: Lower % is better.
+        "states": {
+            "excellent": 0,
+            "good": 35,
+            "medium": 60,
+            "warning": 80,
+            "bad": 90,
+            "critical": 97
+        }
+    },
+
+    "cpu": {
+        "interval": 1,
+        "format": " {usage}%",
+        "tooltip": false,
+        "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty btop'",
+        // CPU: Lower % is better.
+        "states": {
+            "excellent": 0,
+            "good": 35,
+            "medium": 60,
+            "warning": 80,
+            "bad": 90,
+            "critical": 97
+        }
+    },
+
+    "custom/gpu": {
+        "exec": "~/.config/waybar/scripts/gpu_usage.sh",
+        "return-type": "json",
+        "format": " {}",
+        "interval": 2,
+        
+        // On click, run the script with --toggle AND send signal 10 to Waybar
+        // to force this specific module to refresh instantly.
+        "on-click": "~/.config/waybar/scripts/gpu_usage.sh --toggle; pkill -SIGRTMIN+10 waybar",
+        "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty nvtop'",
+        
+        // This tells Waybar to listen for SIGRTMIN+10 to update this module
+        "signal": 10
+    },
+
+"battery": {
+        "interval": 5,
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": " {capacity}%",
+        "format-full": " {capacity}%",
+        "format-alt": "{time} {icon}",
+        "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂"],
+        // Battery: Higher % is better, so the logic triggers are reversed.
+        "states": {
+            "critical": 19,
+            "bad": 24,
+            "warning": 34,
+            "medium": 69,
+            "good": 89,
+            "excellent": 100
+        }
+    },
+
+    // ----------------------------------------------------------------
+    
+    // POWER DRAWER
+    "group/power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+            "click-to-reveal": true
+        },
+        "modules": [
+            "custom/power", // Always visible icon
+            "custom/quit",
+            "custom/sleep",
+            "custom/hibernate",
+            "custom/reboot",
+            "custom/shutdown"
+        ]
+    },
+
+    "custom/power": {
+        "format": "",
+        "tooltip": false
+    },
+    "custom/quit": {
+        "format": "󰗼",
+        "tooltip-format": "Log Out",
+        "on-click": "hyprctl dispatch exit"
+    },
+    "custom/sleep": {
+        "format": "󰒲",
+        "tooltip-format": "Sleep",
+        "on-click": "systemctl suspend"
+    },
+    "custom/hibernate": {
+        "format": "󰋊",
+        "tooltip-format": "Hibernate",
+        "on-click": "systemctl hibernate"
+    },
+    "custom/reboot": {
+        "format": "󰜉",
+        "tooltip-format": "Reboot",
+        "on-click": "systemctl reboot"
+    },
+    "custom/shutdown": {
+        "format": "󰐥",
+        "tooltip-format": "Shutdown",
+        "on-click": "systemctl poweroff"
+    }
+}

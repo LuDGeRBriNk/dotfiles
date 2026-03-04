@@ -1,0 +1,130 @@
+#==========================================================
+#   KEYBOARD SEQUENCES OVERLAP
+#   FOR PORTUGUESE INPUT
+#   HELPS WITH Ç 'T 'S AND ALIKE
+#   USE WITH us_intl keyboard
+#==========================================================
+include "%L"
+
+# ---------------------------------------------------------
+# Single Quote Behaviors
+# ---------------------------------------------------------
+
+# Force two single quotes when pressing the key twice
+<dead_acute> <dead_acute> : "''"
+<dead_acute> <space>      : "'"
+
+# The Cedilla Exception
+<dead_acute> <c> : "ç" U00E7
+<dead_acute> <C> : "Ç" U00C7
+
+# Lowercase Consonants (apostrophe + letter)
+<dead_acute> <b> : "'b"
+<dead_acute> <d> : "'d"
+<dead_acute> <f> : "'f"
+<dead_acute> <g> : "'g"
+<dead_acute> <h> : "'h"
+<dead_acute> <j> : "'j"
+<dead_acute> <k> : "'k"
+<dead_acute> <l> : "'l"
+<dead_acute> <m> : "'m"
+<dead_acute> <n> : "'n"
+<dead_acute> <p> : "'p"
+<dead_acute> <q> : "'q"
+<dead_acute> <r> : "'r"
+<dead_acute> <s> : "'s"
+<dead_acute> <t> : "'t"
+<dead_acute> <v> : "'v"
+<dead_acute> <w> : "'w"
+<dead_acute> <x> : "'x"
+<dead_acute> <y> : "'y"
+<dead_acute> <z> : "'z"
+
+# Uppercase Consonants (apostrophe + letter)
+<dead_acute> <B> : "'B"
+<dead_acute> <D> : "'D"
+<dead_acute> <F> : "'F"
+<dead_acute> <G> : "'G"
+<dead_acute> <H> : "'H"
+<dead_acute> <J> : "'J"
+<dead_acute> <K> : "'K"
+<dead_acute> <L> : "'L"
+<dead_acute> <M> : "'M"
+<dead_acute> <N> : "'N"
+<dead_acute> <P> : "'P"
+<dead_acute> <Q> : "'Q"
+<dead_acute> <R> : "'R"
+<dead_acute> <S> : "'S"
+<dead_acute> <T> : "'T"
+<dead_acute> <V> : "'V"
+<dead_acute> <W> : "'W"
+<dead_acute> <X> : "'X"
+<dead_acute> <Y> : "'Y"
+<dead_acute> <Z> : "'Z"
+
+
+# ---------------------------------------------------------
+# Double Quote Behaviors (Shift + ')
+# ---------------------------------------------------------
+
+# Keep the Trema (ü) for Portuguese compatibility
+<dead_diaeresis> <u> : "ü" U00FC
+<dead_diaeresis> <U> : "Ü" U00DC
+
+# Force two double quotes when pressing the key twice
+<dead_diaeresis> <dead_diaeresis> : "\"\""
+<dead_diaeresis> <space>          : "\""
+
+# Consonants with Double Quotes (lowercase)
+<dead_diaeresis> <a> : "\"a"
+<dead_diaeresis> <b> : "\"b"
+<dead_diaeresis> <c> : "\"c"
+<dead_diaeresis> <d> : "\"d"
+<dead_diaeresis> <e> : "\"e"
+<dead_diaeresis> <f> : "\"f"
+<dead_diaeresis> <g> : "\"g"
+<dead_diaeresis> <h> : "\"h"
+<dead_diaeresis> <i> : "\"i"
+<dead_diaeresis> <j> : "\"j"
+<dead_diaeresis> <k> : "\"k"
+<dead_diaeresis> <l> : "\"l"
+<dead_diaeresis> <m> : "\"m"
+<dead_diaeresis> <n> : "\"n"
+<dead_diaeresis> <o> : "\"o"
+<dead_diaeresis> <p> : "\"p"
+<dead_diaeresis> <q> : "\"q"
+<dead_diaeresis> <r> : "\"r"
+<dead_diaeresis> <s> : "\"s"
+<dead_diaeresis> <t> : "\"t"
+<dead_diaeresis> <v> : "\"v"
+<dead_diaeresis> <w> : "\"w"
+<dead_diaeresis> <x> : "\"x"
+<dead_diaeresis> <y> : "\"y"
+<dead_diaeresis> <z> : "\"z"
+
+# Consonants with Double Quotes (uppercase)
+<dead_diaeresis> <A> : "\"A"
+<dead_diaeresis> <B> : "\"B"
+<dead_diaeresis> <C> : "\"C"
+<dead_diaeresis> <D> : "\"D"
+<dead_diaeresis> <E> : "\"E"
+<dead_diaeresis> <F> : "\"F"
+<dead_diaeresis> <G> : "\"G"
+<dead_diaeresis> <H> : "\"H"
+<dead_diaeresis> <I> : "\"I"
+<dead_diaeresis> <J> : "\"J"
+<dead_diaeresis> <K> : "\"K"
+<dead_diaeresis> <L> : "\"L"
+<dead_diaeresis> <M> : "\"M"
+<dead_diaeresis> <N> : "\"N"
+<dead_diaeresis> <O> : "\"O"
+<dead_diaeresis> <P> : "\"P"
+<dead_diaeresis> <Q> : "\"Q"
+<dead_diaeresis> <R> : "\"R"
+<dead_diaeresis> <S> : "\"S"
+<dead_diaeresis> <T> : "\"T"
+<dead_diaeresis> <V> : "\"V"
+<dead_diaeresis> <W> : "\"W"
+<dead_diaeresis> <X> : "\"X"
+<dead_diaeresis> <Y> : "\"Y"
+<dead_diaeresis> <Z> : "\"Z"
