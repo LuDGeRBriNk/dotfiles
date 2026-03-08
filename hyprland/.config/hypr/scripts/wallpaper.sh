@@ -81,9 +81,16 @@ for MON in $MONITORS; do
 done
 
 # ==========================================================
-# 5. SAVE STATE
+# 5. SAVE STATE & NOTIFY
 # ==========================================================
 # Write the newly applied wallpaper to the state file
 echo "$TARGET_FILE" > "$STATE_FILE"
 
-echo "Done! Applied $(basename "$TARGET_FILE") to all monitors."
+# Define the success message
+WP_NAME=$(basename "$TARGET_FILE")
+
+# Keep terminal output for debugging
+echo "Done! Applied $WP_NAME to all monitors."
+
+# Send desktop notification (vanishes after 5000ms)
+notify-send -t 5000 "Wallpaper Changed" "Applied $WP_NAME"

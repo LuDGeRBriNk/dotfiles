@@ -40,3 +40,7 @@ for prog in "${PROGRAMS[@]}"; do
         notify-send -u critical "UI Reset: $prog Failed" "$ERROR_MSG"
     fi
 done
+
+# Run wallpaper.sh in the same folder:
+"$HOME/.config/hypr/scripts/wallpaper.sh"
+
