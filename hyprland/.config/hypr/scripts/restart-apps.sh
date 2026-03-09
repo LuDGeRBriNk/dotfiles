@@ -13,6 +13,7 @@ done
 sleep 0.2
 
 # 3. Restart and verify each program individually
+
 for prog in "${PROGRAMS[@]}"; do
     # Define a temporary log file for this specific program
     ERROR_LOG="/tmp/${prog}_error.log"
@@ -28,8 +29,8 @@ for prog in "${PROGRAMS[@]}"; do
     if pgrep -x "$prog" > /dev/null; then
         notify-send -u normal "UI Reset: Success" "$prog started successfully."
     else
-        # If it crashed, grab the first 3 lines of the error log
-        ERROR_MSG=$(head -n 3 "$ERROR_LOG")
+        # If it crashed, grab the first 4 lines of the error log
+        ERROR_MSG=$(head -n 4 "$ERROR_LOG")
         
         # Provide a fallback message if it crashed without leaving a log
         if [[ -z "$ERROR_MSG" ]]; then

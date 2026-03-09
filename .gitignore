@@ -1,7 +1,7 @@
 # Ignore everything by default
 /*
 
-# Allow our specific modules
+# Allow specific modules
 !/base/
 !/hyprland/
 !/.gitignore

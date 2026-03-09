@@ -110,7 +110,7 @@ window#waybar {
 #idle_inhibitor {
     background-color: transparent;
     color: @yellow;
-    font-size: 24px;
+    font-size: 22px;
     margin-right: 24px;
     padding: 0;
 }
@@ -118,7 +118,7 @@ window#waybar {
 #custom-notification{
     background-color: transparent;
     color: @yellow;
-    font-size: 24px;
+    font-size: 22px;
     margin-right: 24px;
     padding: 0;
 }
