@@ -1,0 +1,304 @@
+/* ==================================================
+ * WAYBAR PASTEL TERMINAL THEME
+ * Style: Catppuccin-inspired, Retro Drop-shadows, Monospace
+ * ================================================== */
+
+/* --------------------------------------------------
+ * 0. COLOR PALETTE (CSS Variables)
+ * -------------------------------------------------- */
+@define-color base         rgba(30, 30, 46, 0.85); /* Mocha Base */
+@define-color base-hover   rgba(49, 50, 60, 0.85); /* Surface 0 */
+@define-color shadow       rgba(17, 17, 27, 0.8);  /* Crust */
+
+@define-color blue         #89b4fa;
+@define-color mauve        #cba6f7;
+@define-color pink         #f5c2e7;
+@define-color green        #a6e3a1;
+@define-color avocado      #d0e1a7; 
+@define-color teal         #94e2d5;
+@define-color yellow       #f9e2af;
+@define-color red          #f38ba8;
+@define-color rosewater    #f5e0dc;
+@define-color sky          #89dceb;
+@define-color lavender     #b4befe;
+@define-color peach        #fab387;
+@define-color dimmed       #6c7086;
+@define-color text-hover   #bac2de;
+
+/* --------------------------------------------------
+ * 1. GLOBAL TYPOGRAPHY & RESET
+ * -------------------------------------------------- */
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 18px;
+    font-weight: 800;
+    border: none;
+    border-radius: 4px;
+    min-height: 0;
+}
+
+window#waybar {
+    background: @base;
+}
+
+/* --------------------------------------------------
+ * 2. BASE MODULE STYLING
+ * -------------------------------------------------- */
+#custom-appmenu, #workspaces, #window, #custom-notification, #idle_inhibitor,
+#clock, #custom-weather, #battery,
+#tray, #memory, #cpu, #custom-gpu, #backlight, #pulseaudio, 
+#group-network, #group-bluetooth, #group-power {
+    padding: 2px 10px;
+    margin: 4px 6px;
+    transition: background-color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Hover Effect */
+#custom-appmenu:hover, #workspaces:hover, #window:hover, #idle_inhibitor:hover, #custom-notification:hover,
+#clock:hover, #custom-weather:hover, #battery:hover,
+#tray:hover, #memory:hover, #cpu:hover, #custom-gpu:hover, #backlight:hover, #pulseaudio:hover, 
+#group-network:hover, #group-bluetooth:hover, #group-power:hover {
+    background-color: @base-hover;
+    text-shadow: 0px 0px 6px currentColor;
+}
+
+
+/* ==================================================
+ * 3. MODULE SPECIFIC COLORS & BORDERS
+ * ================================================== */
+
+/* --- LEFT MODULES --- */
+
+#custom-appmenu {
+    color: @blue;
+    min-width: 40px;
+    font-size: 28px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+#workspaces {
+    border-left: 3px solid @mauve;
+    border-right: 3px solid @mauve;
+    padding: 0 4px;
+}
+
+#workspaces button {
+    color: @dimmed;
+    padding: 0 6px;
+    transition: color 0.2s ease;
+}
+
+#workspaces button:hover {
+    color: @text-hover;
+}
+
+#workspaces button.active {
+    color: @mauve;
+}
+
+#window {
+    background-color: transparent;
+    color: @pink;
+    box-shadow: none;
+}
+
+
+/* --- CENTER MODULES --- */
+#idle_inhibitor {
+    background-color: transparent;
+    color: @yellow;
+    font-size: 22px;
+    margin-right: 24px;
+    padding: 0;
+}
+
+#custom-notification{
+    background-color: transparent;
+    color: @yellow;
+    font-size: 22px;
+    margin-right: 24px;
+    padding: 0;
+}
+
+
+#clock {
+    padding: 2px 2px;
+    color: @green;
+    background-color: transparent;
+}
+
+#custom-weather {
+    color: @teal;
+    background-color: transparent;
+    min-width: 100px;
+}
+
+
+/* --- RIGHT MODULES --- */
+
+#tray {
+    background-color: transparent;
+}
+
+/* Network Drawer */
+#network.wifi { color: @green; }
+#network.ethernet { color: @blue; }
+#network.disconnected { color: @dimmed; }
+#network.disabled { color: @dimmed; }
+#network {
+    background: transparent;
+    box-shadow: none;
+    margin: 0; padding: 0; margin-right: 12px;
+}
+#network.text { margin-left: 12px; }
+
+/* Bluetooth Drawer */
+#bluetooth {
+    background: transparent;
+    box-shadow: none;
+    margin: 0; padding: 0; margin-right: 6px;
+    font-size: 26px;
+}
+
+#custom-bt-name {
+    color: @blue;
+    background: transparent;
+    box-shadow: none;
+    margin: 0;
+    margin-left: 12px; 
+}
+
+#bluetooth.connected, #bluetooth.on { color: @blue; }
+#bluetooth.disabled, #bluetooth.off { color: @dimmed; }
+
+
+#pulseaudio {
+    color: @sky;
+    border-left: 3px solid @sky;
+    border-right: 3px solid @sky;
+    min-width: 66px;
+}
+
+#pulseaudio.muted {
+    color: @red;
+    border-left: 3px solid @red;
+    border-right: 3px solid @red;
+}
+
+#backlight {
+    color: @rosewater;
+    border-left: 3px solid @rosewater;
+    border-right: 3px solid @rosewater;
+    min-width: 66px;
+}
+
+/* Power Menu Drawer */
+#group-power {
+    border-left: 3px solid @red;
+    border-right: 3px solid @red;
+}
+
+#custom-power, #custom-reboot, #custom-shutdown {
+    color: @red;
+    font-size: 26px;
+    padding: 0 6px;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    margin: 0; margin-right: 12px;
+}
+
+#custom-quit, #custom-sleep, #custom-hibernate{
+    color: @yellow;
+    font-size: 26px;
+    padding: 0 6px;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    margin: 0; margin-right: 12px;
+}
+
+#custom-power:hover, #custom-quit:hover, #custom-sleep:hover, 
+#custom-hibernate:hover, #custom-reboot:hover,  #custom-shutdown:hover {
+    color: @peach; 
+}
+
+
+/* ==========================================================
+   HARDWARE STATE MONITORS (Memory, CPU, Battery)
+   5-Stage Color System mapped to shared classes.
+   ========================================================== */
+
+/* Set a consistent minimum width so the bar doesn't jump */
+#battery, #memory, #cpu, #custom-gpu {
+    min-width: 66px;
+}
+
+
+/* 1. EXCELLENT STATE (Green) */
+#battery.excellent, #memory.excellent, #cpu.excellent, #custom-gpu.excellent {
+    color: @green;
+    border-left: 3px solid @green;
+    border-right: 3px solid @green;
+}
+
+/* 2. GOOD STATE (Avocado) */
+#battery.good, #memory.good, #cpu.good, #custom-gpu.good {
+    color: @avocado;
+    border-left: 3px solid @avocado;
+    border-right: 3px solid @avocado;
+}
+
+/* 3. MEDIUM STATE (Yellow) */
+#battery.medium, #memory.medium, #cpu.medium, #custom-gpu.medium {
+    color: @yellow;
+    border-left: 3px solid @yellow;
+    border-right: 3px solid @yellow;
+}
+
+/* 4. WARNING STATE (Peach) */
+#battery.warning, #memory.warning, #cpu.warning, #custom-gpu.warning {
+    color: @peach;
+    border-left: 3px solid @peach;
+    border-right: 3px solid @peach;
+}
+
+/* 5. BAD STATE (red) */
+#battery.bad, #memory.bad, #cpu.bad, #custom-gpu.bad {
+    color: @red;
+    border-left: 3px solid @red;
+    border-right: 3px solid @red;
+}
+
+/* 6. CRITICAL STATE (Red & Blinking) */
+#battery.critical:not(.charging):not(.plugged), #memory.critical, #cpu.critical, #custom-gpu.critical {
+    color: @red;
+    border-left: 3px solid @red;
+    border-right: 3px solid @red;
+    
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+@keyframes blink {
+    to {
+        background-color: @red;
+        color: @base;
+    }
+}
+
+/* Overrides for Plugged/Charging Battery 
+   (Must be placed after the state colors so it takes precedence) */
+#battery.charging, 
+#battery.plugged,
+#battery.full {
+    color: @blue;
+    border-left: 3px solid @blue;
+    border-right: 3px solid @blue;
+}
