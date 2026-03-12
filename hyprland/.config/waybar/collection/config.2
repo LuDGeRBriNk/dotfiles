@@ -35,12 +35,12 @@
         "tray",                 // System Tray
         "group/network",        // Wi-Fi Drawer
         "group/bluetooth",      // Bluetooth Drawer
-        "pulseaudio",           // Volume Control
-        "backlight",            // Brightness Control
-        "memory",               // RAM Usage
-        "cpu",                  // CPU Usage
-        "custom/gpu",           // GPU usage
-        "battery",              // Battery monitor
+        "group/audio",          // Audio Drawer
+        "group/brightness",     // Brightness Drawer
+        "group/monitor-memory", // Memory Drawer
+        "group/monitor-cpu",    // CPU Drawer
+        "group/monitor-gpu",    // GPU usage
+        "group/battery",        // Battery monitor
         "group/power"           // Power Menu Drawer
     ],
 
@@ -275,9 +275,25 @@
          "on-click": "hyprctl dispatch exec '[float; size 800 600; center] kitty bluetui'"
     },
 
-    "pulseaudio": {
-        "format": "{icon} {volume}%",
-        "format-muted": " Muted",
+    // =====================================
+    // AUDIO DRAWER
+    // =====================================
+    "group/audio": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-audio",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "pulseaudio#icon",
+            "pulseaudio#text"
+        ]
+    },
+
+    "pulseaudio#icon": {
+        "format": "{icon}",
+        "format-muted": "",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -288,76 +304,199 @@
             "default": ["", "", ""]
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-click-right": "hyprctl dispatch exec '[float; size 400 600; move 100%-410 40]' pavucontrol"
+        "on-click-right": "hyprctl dispatch exec '[float; size 400 600; move 100%-410 40]' pavucontrol",
+        "tooltip-format": "Volume: {volume}%"
     },
 
-    "backlight": {
-        "format": "{icon} {percent}%",
+    "pulseaudio#text": {
+        "format": "{volume}%",
+        "format-muted": "Muted",
+        "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
+        "on-click-right": "hyprctl dispatch exec '[float; size 400 600; move 100%-410 40]' pavucontrol",
+        "tooltip": false
+    },
+
+
+    // =====================================
+    // BACKLIGHT DRAWER GROUP
+    // =====================================
+    "group/brightness": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-backlight",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "backlight#icon", // Always visible icon
+            "backlight#text"  // Hidden text that reveals on hover
+        ]
+    },
+
+    "backlight#icon": {
+        "format": "{icon}",
         "format-icons": ["󰃞", "󰃟", "󰃠"],
         "on-scroll-up": "brightnessctl set 1%+",
-        "on-scroll-down": "brightnessctl set 1%-"
+        "on-scroll-down": "brightnessctl set 1%-",
+        "tooltip-format": "Brightness: {percent}%"
+    },
+
+    "backlight#text": {
+        "format": "{percent}%",
+        "on-scroll-up": "brightnessctl set 1%+",
+        "on-scroll-down": "brightnessctl set 1%-",
+        "tooltip": false
     },
 
     // ----------------------------------------------------------------
     // HARDWARE MONITORS
     // ----------------------------------------------------------------
 
-    "memory": {
-        "interval": 1,
-        "format": " {}%",
-        "tooltip": true,
-        "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty btop'",
-        // Memory: Lower % is better.
-        "states": {
-            "excellent": 0,
-            "good": 35,
-            "medium": 60,
-            "warning": 80,
-            "bad": 90,
-            "critical": 97
-        }
+    // =====================================
+    // MEMORY DRAWER
+    // =====================================
+    "group/monitor-memory": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-memory",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "memory#icon",
+            "memory#text"
+        ]
     },
 
-    "cpu": {
+    "memory#icon": {
         "interval": 1,
-        "format": " {usage}%",
+        "format": "",
+        "tooltip-format": "RAM Usage: {}%",
+        "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty btop'",
+        "states": { "excellent": 0, "good": 35, "medium": 60, "warning": 80, "bad": 90, "critical": 97 }
+    },
+
+    "memory#text": {
+        "interval": 1,
+        "format": "{}%",
         "tooltip": false,
         "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty btop'",
-        // CPU: Lower % is better.
-        "states": {
-            "excellent": 0,
-            "good": 35,
-            "medium": 60,
-            "warning": 80,
-            "bad": 90,
-            "critical": 97
-        }
+        "states": { "excellent": 0, "good": 35, "medium": 60, "warning": 80, "bad": 90, "critical": 97 }
     },
 
-    "custom/gpu": {
+// =====================================
+    // CPU DRAWER
+    // =====================================
+    "group/monitor-cpu": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-cpu",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "cpu#icon",
+            "cpu#text"
+        ]
+    },
+
+    "cpu#icon": {
+        "interval": 1,
+        "format": "",
+        "tooltip-format": "CPU Usage: {usage}%",
+        "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty btop'",
+        "states": { "excellent": 0, "good": 35, "medium": 60, "warning": 80, "bad": 90, "critical": 97 }
+    },
+
+    "cpu#text": {
+        "interval": 1,
+        "format": "{usage}%",
+        "tooltip": false,
+        "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty btop'",
+        "states": { "excellent": 0, "good": 35, "medium": 60, "warning": 80, "bad": 90, "critical": 97 }
+    },
+
+// =====================================
+    // GPU DRAWER
+    // =====================================
+    "group/monitor-gpu": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-gpu",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "custom/gpu#icon",
+            "custom/gpu#text"
+        ]
+    },
+
+    "custom/gpu#icon": {
         "exec": "~/.config/waybar/scripts/gpu_usage.sh",
         "return-type": "json",
-        "format": " {}",
+        "format": "",
         "interval": 2,
-        
-        // On click, run the script with --toggle AND send signal 10 to Waybar
-        // to force this specific module to refresh instantly.
+        "tooltip": true,
         "on-click": "~/.config/waybar/scripts/gpu_usage.sh --toggle; pkill -SIGRTMIN+10 waybar",
         "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty nvtop'",
-        
-        // This tells Waybar to listen for SIGRTMIN+10 to update this module
         "signal": 10
     },
 
-"battery": {
+    "custom/gpu#text": {
+        "exec": "~/.config/waybar/scripts/gpu_usage.sh",
+        "return-type": "json",
+        "format": "{}",
+        "interval": 2,
+        "tooltip": false,
+        "on-click": "~/.config/waybar/scripts/gpu_usage.sh --toggle; pkill -SIGRTMIN+10 waybar",
+        "on-click-right": "hyprctl dispatch exec '[float; size 1800 1200; center] kitty nvtop'",
+        "signal": 10
+    },
+
+    // =====================================
+    // BATTERY DRAWER
+    // =====================================
+    "group/battery": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-battery",
+            "transition-left-to-right": true
+        },
+        "modules": [
+            "battery#icon",
+            "battery#text"
+        ]
+    },
+
+    "battery#icon": {
         "interval": 5,
-        "format": "{icon} {capacity}%",
-        "format-charging": "󰂄 {capacity}%",
-        "format-plugged": " {capacity}%",
-        "format-full": " {capacity}%",
-        "format-alt": "{time} {icon}",
+        "format": "{icon}",
+        "format-charging": "󰂄",
+        "format-plugged": "",
+        "format-full": "",
+        "format-alt": "{icon}",
         "format-icons": ["󰁺", "󰁼", "󰁾", "󰂀", "󰂂"],
-        // Battery: Higher % is better, so the logic triggers are reversed.
+        "tooltip-format": "Battery: {capacity}% - {time}",
+        "states": {
+            "critical": 19,
+            "bad": 24,
+            "warning": 34,
+            "medium": 69,
+            "good": 89,
+            "excellent": 100
+        }
+    },
+
+    "battery#text": {
+        "interval": 5,
+        "format": "{capacity}%",
+        "format-charging": "{capacity}%",
+        "format-plugged": "{capacity}%",
+        "format-full": "{capacity}%",
+        "format-alt": "{time}",
+        "tooltip": false,
         "states": {
             "critical": 19,
             "bad": 24,
