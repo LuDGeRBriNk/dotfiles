@@ -36,10 +36,10 @@
         "group/network",        // Wi-Fi Drawer
         "group/bluetooth",      // Bluetooth Drawer
         "group/audio",          // Audio Drawer
-        "group/backlight",      // Brightness Drawer
-        "group/memory",         // Memory Drawer
-        "group/cpu",            // CPU Drawer
-        "group/gpu",           // GPU usage
+        "group/brightness",      // Brightness Drawer
+        "group/monitor-memory",         // Memory Drawer
+        "group/monitor-cpu",            // CPU Drawer
+        "group/monitor-gpu",           // GPU usage
         "group/battery",              // Battery monitor
         "group/power"           // Power Menu Drawer
     ],
@@ -320,7 +320,7 @@
     // =====================================
     // BACKLIGHT DRAWER GROUP
     // =====================================
-    "group/backlight": {
+    "group/brightness": {
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
@@ -352,10 +352,10 @@
     // HARDWARE MONITORS
     // ----------------------------------------------------------------
 
-// =====================================
+    // =====================================
     // MEMORY DRAWER
     // =====================================
-    "group/memory": {
+    "group/monitor-memory": {
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
@@ -387,7 +387,7 @@
 // =====================================
     // CPU DRAWER
     // =====================================
-    "group/cpu": {
+    "group/monitor-cpu": {
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
@@ -419,7 +419,7 @@
 // =====================================
     // GPU DRAWER
     // =====================================
-    "group/gpu": {
+    "group/monitor-gpu": {
         "orientation": "inherit",
         "drawer": {
             "transition-duration": 500,
