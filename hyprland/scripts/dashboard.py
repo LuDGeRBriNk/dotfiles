@@ -366,7 +366,7 @@ html_content = """
 if __name__ == '__main__':
     api = DashboardAPI()
     window = webview.create_window(
-        'Welcome Dashboard', 
+        'System Dashboard', 
         html=html_content, 
         js_api=api, 
         width=900, 
