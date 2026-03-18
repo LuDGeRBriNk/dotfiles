@@ -288,7 +288,7 @@
             "default": ["", "", ""]
         },
         "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-        "on-click-right": "hyprctl dispatch exec '[float; size 400 600; move 100%-410 40]' pavucontrol"
+        "on-click-right": "hyprctl dispatch exec '[float; size 1000 800; move 100%-410 40]' easyeffects"
     },
 
     "backlight": {

@@ -3,7 +3,7 @@
 # ==========================================================
 # CONFIGURATION & ARGUMENTS
 # ==========================================================
-WALLPAPER_DIR="$HOME/vaults/vault/Media/Images/Wallpapers"
+WALLPAPER_DIR="/mnt/vaults/vault/Media/Images/Wallpapers"
 STATE_FILE="$HOME/.cache/current_wallpaper.txt"
 
 ACTION="${1:-random}" 
