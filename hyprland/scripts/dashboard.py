@@ -3,6 +3,9 @@ import psutil
 import subprocess
 import os
 
+# Force the WM_CLASS so Hyprland catches it instantly (Fixes the tiling issue)
+os.environ['RESOURCE_NAME'] = 'sys-dashboard'
+
 # Force software rendering to prevent GBM buffer crashes on NVIDIA/Intel
 os.environ['WEBKIT_DISABLE_COMPOSITING_MODE'] = '1'
 os.environ['WEBKIT_DISABLE_DMABUF_RENDERER'] = '1'
@@ -70,6 +73,10 @@ class DashboardAPI:
         # Standalone Quick Actions
         if action == "update":
             subprocess.Popen(["kitty", "-e", "sudo", "pacman", "-Syu"])
+            return
+        elif action == "update_yay":
+            # AUR helpers like yay should NOT be run with sudo directly
+            subprocess.Popen(["kitty", "-e", "yay", "-Syu"])
             return
         elif action == "files":
             subprocess.Popen(["kitty", "--class", "ranger", "-e", "ranger"])
@@ -246,6 +253,11 @@ html_content = """
             margin-bottom: 20px;
         }
         
+        /* Utility class to make a button span both columns */
+        .span-2 {
+            grid-column: span 2;
+        }
+        
         .section-label {
             color: var(--subtext0);
             font-size: 13px;
@@ -292,9 +304,10 @@ html_content = """
             <h2 style="margin-top: 15px;">Quick Actions</h2>
             <div class="config-grid">
                 <button class="btn" onclick="triggerAction('update')">Pacman Update</button>
+                <button class="btn" onclick="triggerAction('update_yay')">AUR Update (Yay)</button>
                 <button class="btn" onclick="triggerAction('files')">File Manager</button>
                 <button class="btn" onclick="triggerAction('vman')">Toggle VMs</button>
-                <button class="btn" onclick="triggerAction('vpn')">Toggle VPN</button>
+                <button class="btn span-2" onclick="triggerAction('vpn')">Toggle VPN</button>
             </div>
         </div>
 
@@ -366,11 +379,11 @@ html_content = """
 if __name__ == '__main__':
     api = DashboardAPI()
     window = webview.create_window(
-        'System Dashboard', 
+        'Welcome Dashboard', 
         html=html_content, 
         js_api=api, 
-        width=900, 
-        height=550,
+        width=1200, 
+        height=900,
         frameless=False 
     )
     webview.start()
