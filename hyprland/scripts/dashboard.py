@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import webview
 import psutil
 import subprocess
