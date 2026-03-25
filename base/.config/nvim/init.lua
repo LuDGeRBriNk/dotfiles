@@ -224,3 +224,57 @@ end
 vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
 vim.keymap.set('n', 'K', vim.lsp.buf.hover, {})
 vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
+
+
+return {
+  -- 1. Gemini Autocomplete & Chat
+  {
+    "kiddos/gemini.nvim",
+    build = { "pip install -r requirements.txt", ":UpdateRemotePlugins" },
+    config = function()
+      require("gemini").setup({
+        -- Default settings usually work great, but you can customize the model here
+        model = "gemini-3.1-pro", 
+        hints = {
+          enabled = true, -- Enables the ghost-text autocomplete
+        },
+        chat = {
+          enabled = true,
+        }
+      })
+    end,
+  },
+
+  -- 2. Gitsigns (Inline Git modifications)
+  {
+    "lewis6991/gitsigns.nvim",
+    config = function()
+      require("gitsigns").setup({
+        signs = {
+          add          = { text = '│' },
+          change       = { text = '│' },
+          delete       = { text = '_' },
+          topdelete    = { text = '‾' },
+          changedelete = { text = '~' },
+        },
+        current_line_blame = true, -- Shows who wrote the line, like GitLens
+      })
+    end
+  },
+
+  -- 3. Neogit (The Magit-style Git interface)
+  {
+    "NeogitOrg/neogit",
+    dependencies = {
+      "nvim-lua/plenary.nvim",         -- Required base library
+      "sindrets/diffview.nvim",        -- Optional: Highly recommended for resolving conflicts
+    },
+    config = function()
+      require("neogit").setup({
+        integrations = {
+          diffview = true,
+        },
+      })
+    end
+  }
+}
