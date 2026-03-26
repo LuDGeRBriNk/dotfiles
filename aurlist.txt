@@ -1,0 +1,13 @@
+hypryou-utils 1.0.0-3
+lib32-nvidia-580xx-utils 580.142-1
+mkinitcpio-numlock 1.0.3-1
+nvidia-580xx-dkms 580.142-1
+openttd-jgrpp 0.71.0-2
+ranger_devicons-git r108.1bcaff0-1
+snapper-gui-git 0.1+8.r132.20220626.1915750-1
+termius 9.36.2-1
+ttf-ms-fonts 2.0-12
+visual-studio-code-bin 1.111.0-1
+yay-bin 12.5.7-1
+yay-bin-debug 12.5.7-1
+zsh-theme-powerlevel10k-git r4320.8ed1f58e-1

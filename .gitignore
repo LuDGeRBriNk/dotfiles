@@ -7,8 +7,8 @@
 !/.gitignore
 !/README.md
 
-aurlist.txt
-pkglist.txt
+!aurlist.txt
+!pkglist.txt
 
 # STRICTLY IGNORE within the allowed modules (Safety Net)
 **/.ssh/*
