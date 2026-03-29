@@ -3,10 +3,10 @@
 # ==========================================================
 # CONFIGURATION & ARGUMENTS
 # ==========================================================
-WALLPAPER_DIR="/mnt/vaults/vault/Media/Images/Wallpapers"
+WALLPAPER_DIR="/mnt/vaults/vault/Images/Wallpapers"
 STATE_FILE="$HOME/.cache/current_wallpaper.txt"
 
-ACTION="${1:-random}" 
+ACTION="${1:-random}"
 
 if [[ "$ACTION" != "random" && "$ACTION" != "next" && "$ACTION" != "prev" && "$ACTION" != "previous" ]]; then
     echo "Usage: $0 [random|next|prev]"
@@ -28,13 +28,13 @@ fi
 # 2. READ STATE AND CALCULATE TARGET
 # ==========================================================
 if [[ "$ACTION" == "random" ]]; then
-    TARGET_INDEX=$(( RANDOM % TOTAL_WPS ))
+    TARGET_INDEX=$((RANDOM % TOTAL_WPS))
 else
     CURRENT_WP=""
     if [ -f "$STATE_FILE" ]; then
         CURRENT_WP=$(cat "$STATE_FILE")
     fi
-    
+
     CURRENT_WP_NAME=$(basename "$CURRENT_WP")
     CURRENT_INDEX=-1
 
@@ -47,12 +47,12 @@ else
     done
 
     if [[ "$ACTION" == "next" ]]; then
-        TARGET_INDEX=$(( (CURRENT_INDEX + 1) % TOTAL_WPS ))
+        TARGET_INDEX=$(((CURRENT_INDEX + 1) % TOTAL_WPS))
     else
         if [ "$CURRENT_INDEX" -eq -1 ]; then
-            TARGET_INDEX=$(( TOTAL_WPS - 1 )) 
+            TARGET_INDEX=$((TOTAL_WPS - 1))
         else
-            TARGET_INDEX=$(( (CURRENT_INDEX - 1 + TOTAL_WPS) % TOTAL_WPS ))
+            TARGET_INDEX=$(((CURRENT_INDEX - 1 + TOTAL_WPS) % TOTAL_WPS))
         fi
     fi
 fi
@@ -84,7 +84,7 @@ done
 # 5. SAVE STATE & NOTIFY
 # ==========================================================
 # Write the newly applied wallpaper to the state file
-echo "$TARGET_FILE" > "$STATE_FILE"
+echo "$TARGET_FILE" >"$STATE_FILE"
 
 # Define the success message
 WP_NAME=$(basename "$TARGET_FILE")
@@ -94,3 +94,4 @@ echo "Done! Applied $WP_NAME to all monitors."
 
 # Send desktop notification (vanishes after 5000ms)
 notify-send -t 5000 "Wallpaper Changed" "Applied $WP_NAME"
+
