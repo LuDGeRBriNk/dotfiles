@@ -163,8 +163,3 @@ bindkey -M vicmd 'j' history-substring-search-down
 [ -f "$HOME/.config/shell.shortcuts" ] && source "$HOME/.config/shell.shortcuts"
 [ -f "$HOME/.config/shell.aliases" ] && source "$HOME/.config/shell.aliases"
 [ -f "$HOME/.config/shell.autostart" ] && source "$HOME/.config/shell.autostart"
-
-# Auto load hyprland if tty is tty1 - May fail the next reboot after changing tty. Needs improvement.
-if [[ "$(tty)" == '/dev/tty1' ]] && [[ -z "$WAYLAND_DISPLAY" ]] && [[ -z "$DISPLAY" ]]; then
-    exec start-hyprland
-fi
